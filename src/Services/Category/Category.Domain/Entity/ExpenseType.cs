@@ -9,5 +9,16 @@ namespace Category.Domain.Entity
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public ExpenseType()
+        {
+
+        }
+
+        public ExpenseType(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
     }
 }

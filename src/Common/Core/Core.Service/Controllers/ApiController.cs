@@ -9,7 +9,7 @@ namespace Core.Service.Controllers
     public abstract class ApiController : ControllerBase
     {
         private readonly IDomainNotificationHandler _notifications;
-        private readonly IMediatorHandler _mediator;
+        protected IMediatorHandler _mediator { get; }
 
         public ApiController(IDomainNotificationHandler notifications, IMediatorHandler mediator)
         {
@@ -18,6 +18,8 @@ namespace Core.Service.Controllers
         }
 
         private bool IsValidOperation() => !_notifications.HasNotifications();
+
+        
 
         protected void NotifyError(string key, string message, int code = 0) => _mediator.RaiseEvent(new DomainNotification(key, message, code));
 

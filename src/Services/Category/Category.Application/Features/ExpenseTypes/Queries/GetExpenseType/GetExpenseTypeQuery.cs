@@ -1,9 +1,4 @@
 ﻿using Core.Service.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Category.Application.Features.ExpenseTypes.Queries.GetExpenseType
 {
@@ -16,6 +11,6 @@ namespace Category.Application.Features.ExpenseTypes.Queries.GetExpenseType
             Id = id;
         }
         public override bool IsValid() => Id != Guid.Empty;
-        
+
     }
 }

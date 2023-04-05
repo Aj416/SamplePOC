@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Category.Application.Features.ExpenseTypes.Commands.UpdateExpenseType;
 using Category.Application.Features.ExpenseTypes.Queries;
 using Category.Domain.Entity;
 
@@ -9,6 +10,7 @@ namespace Category.Application.Mappings
         public MappingProfile()
         {
             CreateMap<ExpenseType, ExpenseTypeModel>().ReverseMap();
+            CreateMap<UpdateExpenseTypeCommand, ExpenseType>();
         }
     }
 }
