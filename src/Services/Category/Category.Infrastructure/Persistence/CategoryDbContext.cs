@@ -1,4 +1,5 @@
 ﻿using Category.Domain.Entity;
+using Category.Infrastructure.Configuration;
 using Core.Service.Behaviours;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,14 @@ namespace Category.Infrastructure.Persistence
             _contextBehaviours.ForEach(e => e.Apply(contextEntries));
 
             return await base.SaveChangesAsync(cancellationToken);
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ExpenseTypeConfiguration).Assembly);
         }
 
         public DbSet<ExpenseType> ExpenseTypes { get; set; }

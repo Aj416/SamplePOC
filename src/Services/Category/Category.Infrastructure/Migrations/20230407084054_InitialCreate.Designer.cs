@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Category.Infrastructure.Migrations
 {
     [DbContext(typeof(CategoryDbContext))]
-    [Migration("20230406090738_InitialCreate")]
+    [Migration("20230407084054_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -35,13 +35,15 @@ namespace Category.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
