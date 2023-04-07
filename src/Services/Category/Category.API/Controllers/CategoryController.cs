@@ -7,6 +7,7 @@ using Category.Application.Features.ExpenseTypes.Queries.GetExpenseTypeList;
 using Core.Service.Bus;
 using Core.Service.Controllers;
 using Core.Service.Notifications;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Category.API.Controllers
