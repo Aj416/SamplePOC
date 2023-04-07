@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Category.Application.Contracts.Persistence;
-using Category.Domain.Entity;
 using Core.Service.Bus;
 using Core.Service.Commands;
 using Core.Service.Notifications;
@@ -34,7 +33,9 @@ namespace Category.Application.Features.ExpenseTypes.Commands.UpdateExpenseType
                 return Unit.Value;
             }
 
-            result = _mapper.Map<ExpenseType>(request);
+            result.SetExpense(request.Name, request.Description);
+
+
             _categoryRepository.Update(result);
 
             if (await Commit())

@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  categorydb:
+    container_name: categorydb
+    environment: 
+        SA_PASSWORD: "SdF2345678"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1433:1433" 
+

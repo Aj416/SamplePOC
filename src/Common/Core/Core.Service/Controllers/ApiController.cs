@@ -19,7 +19,7 @@ namespace Core.Service.Controllers
 
         private bool IsValidOperation() => !_notifications.HasNotifications();
 
-        
+
 
         protected void NotifyError(string key, string message, int code = 0) => _mediator.RaiseEvent(new DomainNotification(key, message, code));
 

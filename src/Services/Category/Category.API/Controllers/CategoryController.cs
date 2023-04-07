@@ -24,7 +24,8 @@ namespace Category.API.Controllers
         public async Task<IActionResult> GetCategories()
         {
             var result = await _mediator.SendQuery(new GetExpenseTypeListQuery());
-            return Response(result);
+
+            return result != null ? Response(result) : NotFound();
         }
 
         [HttpGet("{id}")]
