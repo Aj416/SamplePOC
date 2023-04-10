@@ -12,10 +12,12 @@ namespace Category.Infrastructure.Host
         {
             using var scope = serviceScopeFactory.CreateScope();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<NativeInjectorBootStrapper>>();
-
             var database = scope.ServiceProvider.GetService<CategoryDbContext>().Database;
+
             logger.LogInformation($"Running system migrations for database {database.GetDbConnection().Database}");
             await database.MigrateAsync();
+
+            logger.LogInformation($"Completed system migrations for database {database.GetDbConnection().Database}");
         }
 
         public static async Task EnsureSeedData(IServiceScopeFactory serviceScopeFactory)

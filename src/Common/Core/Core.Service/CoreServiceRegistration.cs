@@ -6,8 +6,8 @@ using Core.Service.Notifications;
 using Core.Service.TimeStamp;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System.Reflection;
 
 namespace Core.Service
@@ -26,7 +26,8 @@ namespace Core.Service
             services.AddScoped<ITimeStampService, TimeStampService>();
             services.AddScoped<IContextBehaviour, CreatedDateBehaviour>();
             services.AddScoped<IContextBehaviour, ModifiedDateBehaviour>();
-           
+            services.AddTransient<JsonSerializerSettings>(x => new JsonSerializerSettings().AsDefault());
+
 
             return services;
         }

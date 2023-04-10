@@ -1,4 +1,5 @@
 ﻿using Category.Application.Contracts.Persistence;
+using Category.Application.Features.ExpenseTypes.Events.ExpenseTypeCreated;
 using Category.Domain.Entity;
 using Core.Service.Bus;
 using Core.Service.Commands;
@@ -28,6 +29,7 @@ namespace Category.Application.Features.ExpenseTypes.Commands.CreateExpenseType
 
             if (await Commit())
             {
+                await _mediator.RaiseEvent(new ExpenseTypeCreatedEvent(data.Id));
                 return data.Id;
             }
             else

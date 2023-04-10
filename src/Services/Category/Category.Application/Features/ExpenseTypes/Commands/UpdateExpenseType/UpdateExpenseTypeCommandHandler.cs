@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Category.Application.Contracts.Persistence;
+using Category.Application.Features.ExpenseTypes.Events.ExpenseTypeUpdated;
 using Core.Service.Bus;
 using Core.Service.Commands;
 using Core.Service.Notifications;
@@ -40,6 +41,7 @@ namespace Category.Application.Features.ExpenseTypes.Commands.UpdateExpenseType
 
             if (await Commit())
             {
+                await _mediator.RaiseEvent(new ExpenseTypeUpdatedEvent(result.Id));
                 return Unit.Value;
             }
             else

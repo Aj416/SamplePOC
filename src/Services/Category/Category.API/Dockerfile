@@ -7,9 +7,10 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Services/Category/Category.API/Category.API.csproj", "Services/Category/Category.API/"]
+COPY ["Common/Search/Search.Service/Search.Service.csproj", "Common/Search/Search.Service/"]
+COPY ["Common/Core/Core.Service/Core.Service.csproj", "Common/Core/Core.Service/"]
 COPY ["Services/Category/Category.Application/Category.Application.csproj", "Services/Category/Category.Application/"]
 COPY ["Services/Category/Category.Domain/Category.Domain.csproj", "Services/Category/Category.Domain/"]
-COPY ["Common/Core/Core.Service/Core.Service.csproj", "Common/Core/Core.Service/"]
 COPY ["Services/Category/Category.Infrastructure/Category.Infrastructure.csproj", "Services/Category/Category.Infrastructure/"]
 RUN dotnet restore "Services/Category/Category.API/Category.API.csproj"
 COPY . .

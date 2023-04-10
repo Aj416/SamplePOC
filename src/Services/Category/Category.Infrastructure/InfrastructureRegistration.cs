@@ -15,7 +15,7 @@ namespace Category.Infrastructure
         {
             services.AddScoped<DbContext, CategoryDbContext>();
             services.AddDbContext<CategoryDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("CategoryConnectionString")));
+                options.UseSqlServer(configuration.GetConnectionString("CategoryConnectionString"), providerOptions => providerOptions.EnableRetryOnFailure()));
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

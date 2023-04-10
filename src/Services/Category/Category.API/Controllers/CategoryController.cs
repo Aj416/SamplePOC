@@ -4,11 +4,12 @@ using Category.Application.Features.ExpenseTypes.Commands.DeleteExpenseType;
 using Category.Application.Features.ExpenseTypes.Commands.UpdateExpenseType;
 using Category.Application.Features.ExpenseTypes.Queries.GetExpenseType;
 using Category.Application.Features.ExpenseTypes.Queries.GetExpenseTypeList;
+using Category.Application.Models.Search;
 using Core.Service.Bus;
 using Core.Service.Controllers;
 using Core.Service.Notifications;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Search.Service.Interfaces;
 
 namespace Category.API.Controllers
 {
@@ -16,9 +17,11 @@ namespace Category.API.Controllers
 
     public class CategoryController : ApiController
     {
-        public CategoryController(IMediatorHandler mediatorHandler, IDomainNotificationHandler domainNotificationHandler) : base(domainNotificationHandler, mediatorHandler)
-        {
+        private readonly ISearchService<CategorySearchModel> _categorySearchService;
 
+        public CategoryController(IMediatorHandler mediatorHandler, IDomainNotificationHandler domainNotificationHandler, ISearchService<CategorySearchModel> categorySearchService) : base(domainNotificationHandler, mediatorHandler)
+        {
+            _categorySearchService = categorySearchService;
         }
 
         [HttpGet]
@@ -57,5 +60,10 @@ namespace Category.API.Controllers
             return Response();
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> CategorySearch([FromQuery] CategorySearchCriteriaModel model)
+        {
+            return Response(await _categorySearchService.Search(model));
+        }
     }
 }

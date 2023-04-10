@@ -1,9 +1,11 @@
+using Category.API;
 using Category.Application;
 using Category.Infrastructure;
 using Core.Service;
 using Core.Service.Exceptions;
 using Hellang.Middleware.ProblemDetails;
 using MassTransit;
+using Search.Service;
 using System.Data;
 using System.Diagnostics;
 
@@ -15,8 +17,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCoreServices();
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddSearchServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApiservices(builder.Configuration);
+
 // Configure problem details
 builder.Services.AddProblemDetails(options =>
 {

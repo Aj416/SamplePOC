@@ -1,4 +1,5 @@
 ﻿using Category.Application.Contracts.Persistence;
+using Category.Application.Features.ExpenseTypes.Events.ExpenseTypeDeleted;
 using Core.Service.Bus;
 using Core.Service.Commands;
 using Core.Service.Notifications;
@@ -33,6 +34,7 @@ namespace Category.Application.Features.ExpenseTypes.Commands.DeleteExpenseType
 
             if (await Commit())
             {
+                await _mediator.RaiseEvent(new ExpenseTypeDeletedEvent(result.Id));
                 return Unit.Value;
             }
             else
